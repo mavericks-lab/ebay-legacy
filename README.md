@@ -21,10 +21,10 @@ To authorize your app to make requests to eBay on behalf of the merchant, you ne
 
 Make a request to **...yourdomain/ebay/install** to test installation flow. 
 
-###Making requests
+### Making requests
 In order to make requests, you have to make sure you have provided the required params in the **ebay.php** file in your **config** directory. To do this, copy and paste this in your .env file and make the necessary changes
 
-**EBAY_COMPATIBILITY_LEVEL=951
+EBAY_COMPATIBILITY_LEVEL=951
 EBAY_RUNAME=XXXXXXXXX
 EBAY_API_APP_NAME=XXXXXXXXX
 EBAY_API_CERT_NAME=XXXXXXXXX
@@ -33,6 +33,6 @@ EBAY_SIGN_IN_URL=https://signin.sandbox.ebay
 EBAY_BASE_URL=https://api.sandbox.ebay.com/ws/api.dll
 EBAY_WARNING_LEVEL=High
 EBAY_ERROR_LANGUAGE=en_US
-EBAY_USER_TOKEN=XXXXXXXXX**
+EBAY_USER_TOKEN=XXXXXXXXX
 
 ####Request methods
