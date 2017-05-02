@@ -1,6 +1,6 @@
 {
     "name" : "maverickslab/ebay-legacy",
-    "description" : "This package is a layer over eBays trading api to make interaction with eBay easier",
+    "description" : "This package is a layer over eBay's trading api to make interaction with eBay easier",
     "type" : "library",
     "license" : "MIT",
     "keywords" : [
