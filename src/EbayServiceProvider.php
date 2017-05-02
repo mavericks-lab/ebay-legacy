@@ -33,7 +33,7 @@ class EbayServiceProvider extends ServiceProvider
     {
         //publish configuration files
         $this->publishes([
-            __DIR__ . "/../../config/ebay.php" => config_path('ebay.php'),
+            __DIR__ . "/config/ebay.php" => config_path('ebay.php'),
         ]);
 
         //load routes
