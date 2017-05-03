@@ -35,4 +35,11 @@ EBAY_WARNING_LEVEL=High
 EBAY_ERROR_LANGUAGE=en_US
 EBAY_USER_TOKEN=XXXXXXXXX
 
-####Request methods
+### Request methods
+
+### Features
+1. Authenticating with eBay
+2. Import products from eBay
+3. Create listings on eBay
+4. Import orders on eBay
+5. Update orders on eBay
