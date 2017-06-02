@@ -169,7 +169,7 @@ class Order
                 'ShipmentTrackingNumber' => [
                     $fulfillment_data['tracking_number']
                 ],
-                'ShipmentCarrieUsed'     => [
+                'ShippingCarrierUsed'    => [
                     $fulfillment_data['carrier']
                 ]
             ]
