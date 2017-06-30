@@ -14,7 +14,7 @@
     }
   ],
   "require": {
-    "php": "^5.3.3 || ^7.0",
+    "php": "^7.0",
     "guzzlehttp/guzzle": "^6.2",
     "cloudinary/cloudinary_php": "^1.7"
   },
@@ -22,7 +22,5 @@
     "psr-4": {
       "Maverickslab\\Ebay\\": "src/"
     }
-  },
-  "minimum-stability": "stable",
-  "prefer-stable": true
+  }
 }
