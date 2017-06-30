@@ -1,27 +1,28 @@
 {
-    "name" : "maverickslab/ebay-legacy",
-    "description" : "This package is a layer over eBay's trading api to make interaction with eBay easier",
-    "type" : "library",
-    "license" : "MIT",
-    "keywords" : [
-        "ebay",
-        "laravel"
-    ],
-    "authors" : [
-        {
-            "name" : "Albert Fiati-Kumasenu",
-            "email" : "albert@syncommerceapp.com"
-        }
-    ],
-    "require" : {
-        "php" : "^5.3.3 || ^7.0",
-        "guzzlehttp/guzzle" : "^6.2",
-        "cloudinary/cloudinary_php" : "^1.7"
-    },
-    "autoload" : {
-        "psr-4" : {
-            "Maverickslab\\Ebay\\" : "src/"
-        }
-    },
-    "minimum-stability" : "stable"
+  "name": "maverickslab/ebay-legacy",
+  "description": "This package is a layer over eBay's trading api to make interaction with eBay easier",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "ebay",
+    "laravel"
+  ],
+  "authors": [
+    {
+      "name": "Albert Fiati-Kumasenu",
+      "email": "albert@syncommerceapp.com"
+    }
+  ],
+  "require": {
+    "php": "^5.3.3 || ^7.0",
+    "guzzlehttp/guzzle": "^6.2",
+    "cloudinary/cloudinary_php": "^1.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "Maverickslab\\Ebay\\": "src/"
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
 }
