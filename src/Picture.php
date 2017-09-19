@@ -15,6 +15,13 @@
     {
         use InjectAPIRequester;
 
+        /**
+         * @param     $user_token
+         * @param     $image_url
+         * @param int $site_id
+         *
+         * @return mixed|null
+         */
         public function upload($user_token, $image_url, $site_id = 0)
         {
             $image_url = self::resize($image_url);
@@ -39,6 +46,11 @@
         /*
         * resize the image
         */
+        /**
+         * @param $image_url
+         *
+         * @return array
+         */
         public function resize($image_url)
         {
             try {
@@ -68,6 +80,12 @@
             }
         }
 
+        /**
+         * @param $image_path
+         * @param $options
+         *
+         * @return mixed
+         */
         public function uploadToCloudinary($image_path, $options)
         {
             Cloudinary::config([
