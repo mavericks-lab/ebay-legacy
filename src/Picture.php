@@ -1,78 +1,81 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Optimistic
- * Date: 21/03/2015
- * Time: 08:01
- */
+    /**
+     * Created by PhpStorm.
+     * User: Optimistic
+     * Date: 21/03/2015
+     * Time: 08:01
+     */
 
-namespace Maverickslab\Ebay;
+    namespace Maverickslab\Ebay;
 
-use Cloudinary;
-use Cloudinary\Uploader;
+    use Cloudinary;
+    use Cloudinary\Uploader;
 
-class Picture
-{
-    use InjectAPIRequester;
-
-    public function upload($user_token, $url, $site_id = 0)
+    class Picture
     {
-        $image_url = self::resize($url);
+        use InjectAPIRequester;
 
-        if ($image_url) {
-            $inputs = [];
-            $inputs['RequesterCredentials'] = [
-                'eBayAuthToken' => $user_token
-            ];
-            $inputs['ExternalPictureURL'] = [$image_url];
-            $inputs['PictureSet'] = ['Supersize'];
+        public function upload($user_token, $image_url, $site_id = 0)
+        {
+            $image_url = self::resize($image_url);
 
-            return $this->requester->request($inputs, 'UploadSiteHostedPictures', $site_id);
-        }
+            if ($image_url) {
+                $inputs = [];
+                $inputs['RequesterCredentials'] = [
+                    'eBayAuthToken' => $user_token
+                ];
 
-        //nothing was done here
-        return null;
-    }
+                $inputs['ExternalPictureURL'] = [$image_url];
 
-    /*
-    * resize the image
-    */
-    public function resize($image_url)
-    {
-        try {
-            $file_info = pathinfo($image_url);
-            list($original_width, $original_height) = getimagesize(urldecode($image_url));
+                $inputs['PictureSet'] = ['Supersize'];
 
-            if ($original_width >= 500 || $original_height >= 500) {
-                return $image_url;
+                return $this->requester->request($inputs, 'UploadSiteHostedPictures', $site_id);
             }
 
-            $desired_width = 500;
-            $desired_height = ceil(($desired_width / $original_width) * $original_height);
+            //nothing was done here
+            return null;
+        }
 
-            $cloudinary_image = self::uploadToCloudinary($image_url, [
-                'crop'   => 'mfit',
-                'width'  => $desired_width,
-                'height' => $desired_height
+        /*
+        * resize the image
+        */
+        public function resize($image_url)
+        {
+            try {
+                $file_info = pathinfo($image_url);
+
+                list($original_width, $original_height) = getimagesize(urldecode($image_url));
+
+                if ($original_width >= 500 || $original_height >= 500) {
+                    return $image_url;
+                }
+
+                $desired_width = 500;
+                $desired_height = (int)ceil(($desired_width / $original_width) * $original_height);
+
+                $cloudinary_image = self::uploadToCloudinary($image_url, [
+                    'crop'   => 'scale',
+                    'width'  => $desired_width,
+                    'height' => $desired_height
+                ]);
+
+                return $cloudinary_image['url'];
+            } catch (\Exception $ex) {
+                return [
+                    'Ack'     => 'failure',
+                    'message' => $ex->getMessage()
+                ];
+            }
+        }
+
+        public function uploadToCloudinary($image_path, $options)
+        {
+            Cloudinary::config([
+                "cloud_name" => config('ebay.cloudinary_cloud_name'),
+                "api_key"    => config('ebay.cloudinary_api_key'),
+                "api_secret" => config('ebay.cloudinary_api_secret')
             ]);
 
-            return $cloudinary_image['url'];
-        } catch (\Exception $ex) {
-            \Log::info("Image could not be resized => " . $ex->getMessage());
-
-            return ['Ack'     => 'failure',
-                    'message' => $ex->getMessage()];
+            return Uploader::upload($image_path, $options);
         }
     }
-
-    public function uploadToCloudinary($image_path, $options)
-    {
-        Cloudinary::config([
-            "cloud_name" => config('ebay.cloudinary_cloud_name'),
-            "api_key"    => config('ebay.cloudinary_api_key'),
-            "api_secret" => config('ebay.cloudinary_api_secret')
-        ]);
-
-        return Uploader::upload($image_path, $options);
-    }
-}
